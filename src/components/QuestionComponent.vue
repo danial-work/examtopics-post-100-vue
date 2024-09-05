@@ -1,11 +1,16 @@
 <template>
-  <div>
+  <div class="l-width">
     <h2 class="text_left">
       <a v-if="q_l[Object.keys(q_l)[0]]" :href="q_l[Object.keys(q_l)[0]]" target="_blank">Question {{ Object.keys(q_l)[0] }}</a>
       <p v-else>Question {{ Object.keys(q_l)[0] }}</p>
     </h2>
-    <iframe v-if="q_l[Object.keys(q_l)[0]]" :src="q_l[Object.keys(q_l)[0]]"></iframe>
-    <p v-else>No question available</p>
+    <div v-if="mode=='item'">
+      <iframe v-if="q_l[Object.keys(q_l)[0]]" :src="q_l[Object.keys(q_l)[0]]"></iframe>
+      <p class="text_left" v-else>No question available</p>
+    </div>
+    <div v-else>
+      <p class="text_left" v-if="!q_l[Object.keys(q_l)[0]]">No question available</p>
+    </div>
     
   </div>
 </template>
@@ -14,7 +19,8 @@
 export default {
   name: 'QuestionComponent',
   props: {
-    q_l: Object
+    q_l: Object,
+    mode: String
   }
 }
 
@@ -37,7 +43,7 @@ a {
   color: #42b983;
 }
 
-div {
+div.l-width {
   width: 90%;
   margin: 0 auto;
 }
